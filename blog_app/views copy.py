@@ -1,3 +1,6 @@
+#Functional Based View - Same Workable View -  urls copy.py as a workable url for this
+
+'''
 from django.shortcuts import redirect, render
 
 from blog_app.forms import PostForm
@@ -87,3 +90,22 @@ def post_update(request, pk):
                 "post_create.html",
                 {"form": form},
             )
+        
+
+@login_required
+def draft_publish(request,pk):
+    post = Post.objects.get(pk=pk, published_at__isnull=True)
+    post.published_at = timezone.now()
+    post.save()
+    return redirect("post-list")
+
+@login_required
+def post_delete(request, pk):
+    post = Post.objects.get(pk=pk)
+    post.delete()
+    if post.published_at:
+        return redirect("post-list")
+    else:
+        return redirect("draft-list")
+    
+    '''
