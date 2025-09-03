@@ -29,11 +29,12 @@
                 </span>
               </a>
 
-            <a href="" class="btn text-white">
-              <span class="material-symbols-outlined lg-icons">
-                logout
-              </span>
-            </a>
+              <form action="{% url 'logout' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn text-white" aria-label="Logout">
+                  <span class="material-symbols-outlined lg-icons">logout</span>
+                </button>
+              </form>
 
             {% else %}
           <a href="{% url 'login' %}" class="btn text-white">
