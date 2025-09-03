@@ -6,7 +6,7 @@
         <div class="post">
             {% if request.user.is_authenticated %}
             <div class="mt-2">
-                <a href="#" class="btn btn-success">Publish</a>
+                <a href="{% url 'draft-publish' post.pk %}" class="btn btn-success">Publish</a>
             </div>
             {% endif %}
             <h1>

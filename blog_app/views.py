@@ -5,6 +5,7 @@ from blog_app.models import Post
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse
+from django.utils import timezone  
 
 class PostListView(ListView):
     model = Post
@@ -72,3 +73,9 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         else:
             return reverse("draft-detail", kwargs={"pk": post.pk})
 
+@login_required
+def draft_publish(request,pk):
+    post = Post.objects.get(pk=pk, published_at__isnull=True)
+    post.published_at = timezone.now()
+    post.save()
+    return redirect("post-list")

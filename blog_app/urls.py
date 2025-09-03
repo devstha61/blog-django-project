@@ -8,5 +8,6 @@ urlpatterns = [
     path("draft-detail/<int:pk>/", views.DraftDetailView.as_view(), name="draft-detail"),
     path("post-create/", views.PostCreateView.as_view(), name="post-create"),
     path("post-update/<int:pk>/", views.PostUpdateView.as_view(), name="post-update"),
+    path("draft-publish/<int:pk>/", views.draft_publish, name="draft-publish"),
 
 ]
